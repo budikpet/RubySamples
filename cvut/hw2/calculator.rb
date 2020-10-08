@@ -27,7 +27,7 @@ class Calculator
   def divide(divider)
     raise ZeroDivisionError, 'Cannot divide by zero!' if divider.zero?
 
-    @curr_val /= divider
+    @curr_val /= divider.to_f
     self
   end
 
@@ -69,7 +69,7 @@ raise RuntimeError if calc.name != 'SMARTY'
 calc = Calculator.new
 calc.add(3).subtract(2).add(8).divide(4).result
 
-raise RuntimeError if calc.result != 9 / 4
+raise RuntimeError if calc.result != 9 / 4.0
 raise RuntimeError unless calc.name.nil?
 
 raise RuntimeError if Calculator.extreme(:max, [3, 5, 7, 5]) != 7
