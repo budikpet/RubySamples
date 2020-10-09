@@ -40,6 +40,8 @@ class Calculator
       arr.max
     elsif ext_type == :min
       arr.min
+    else
+      raise ArgumentError, 'Unknown parameter'
     end
   end
 
@@ -74,9 +76,15 @@ raise RuntimeError unless calc.name.nil?
 
 raise RuntimeError if Calculator.extreme(:max, [3, 5, 7, 5]) != 7
 raise RuntimeError if Calculator.extreme(:min, [3, 5, 7, 5]) != 3
-raise RuntimeError unless Calculator.extreme(:something, [3, 5, 7, 5]).nil?
 raise RuntimeError if Calculator.number? 'foo'
 raise RuntimeError unless Calculator.number? 5.2
+
+begin
+  Calculator.extreme(:something, [3, 5, 7, 5])
+  raise RuntimeError
+rescue ArgumentError => e
+  raise RuntimeError if e.message != 'Unknown parameter'
+end
 
 # Check exception
 begin
