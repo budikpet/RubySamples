@@ -25,7 +25,7 @@ rescue NoMethodError
 end
 
 begin
-  arm = Arm.new(:grabber, 0)
+  Arm.new(:grabber, 0)
   raise RuntimeError
 rescue ArgumentError
 end

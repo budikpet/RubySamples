@@ -16,7 +16,7 @@ class Robot
   end
 
   def arms
-    @arms.values.inject([]) { |arr_full, arr| arr_full.push(*arr) }
+    @arms.values.flatten
   end
 
   def add_arms(*new_arms)
