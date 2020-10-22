@@ -2,6 +2,8 @@
 
 # MyStruct
 class MyStruct
+  attr_reader :vars
+
   def initialize(input = nil)
     @vars = {}
     # Create instance attributes, getters/setters from Hash
@@ -39,9 +41,16 @@ class MyStruct
 
   def to_h(&block)
     if block_given?
-      Hash[@vars.each_pair { |name, value| block.call(name, value) }]
+      @vars.to_h(&block)
     else
       @vars.to_h
     end
+  end
+
+  ## Equals
+  def eql?(other)
+    return false unless other.is_a?(MyStruct)
+
+    @vars.eql?(other.vars!)
   end
 end
