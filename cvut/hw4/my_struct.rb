@@ -51,6 +51,12 @@ class MyStruct
   def eql?(other)
     return false unless other.is_a?(MyStruct)
 
-    @vars.eql?(other.vars!)
+    @vars.eql?(other.vars)
+  end
+
+  def ==(other)
+    return false unless other.is_a?(MyStruct)
+
+    @vars == other.vars
   end
 end

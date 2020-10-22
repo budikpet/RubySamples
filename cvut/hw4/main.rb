@@ -35,3 +35,6 @@ rescue NameError => e
 end
 
 ## EQL?; ==
+
+raise 'Should be equal' unless s_inline.eql?(s_my_struct)
+raise 'Should be ==' unless s_inline == s_my_struct
