@@ -38,3 +38,6 @@ end
 
 raise 'Should be equal' unless s_inline.eql?(s_my_struct)
 raise 'Should be ==' unless s_inline == s_my_struct
+
+## EACH_PAIR
+s_inline.each_pair { |name, value| puts "[#{name.upcase.to_s}, #{value.downcase}]" }.to_h

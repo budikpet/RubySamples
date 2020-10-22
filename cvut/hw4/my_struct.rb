@@ -47,6 +47,15 @@ class MyStruct
     end
   end
 
+  # Returns enumerator if no block is given
+  # Yields all attributes if a block is given
+  def each_pair(&block)
+    return to_enum(__method__) { @vars.size } unless block_given?
+
+    @vars.each_pair { |p| block.call(p) }
+    self
+  end
+
   ## Equals
   def eql?(other)
     return false unless other.is_a?(MyStruct)
