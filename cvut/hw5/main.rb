@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative 'roman'
+require_relative 'string_addition'
+require_relative 'integer_addition'
 
 def assert_equal(expected, value)
   raise "Expected result: #{expected}, got #{value}." unless expected == value
@@ -99,7 +101,7 @@ rescue ArgumentError => e
 end
 
 begin
-  a = Roman.new('MXAI')
+  Roman.new('MXAI')
   raise 'Should have raised error.'
 rescue ArgumentError => e
   puts "Overflow error raised with msg: #{e.message}"
@@ -113,7 +115,11 @@ assert_equal(2020, 'MMXX'.number)
 int_to_rom = 2020.to_rom
 raise 'Should be instance of Roman.' unless int_to_rom.is_a? Roman
 
+assert_equal(2020, int_to_rom)
+
 str_to_rom = 'MMXX'.to_rom
 raise 'Should be instance of Roman.' unless str_to_rom.is_a? Roman
+
+assert_equal(2020, str_to_rom)
 
 puts 'All checked.'
