@@ -25,6 +25,7 @@ assert_equal(426, Roman.roman_to_arabic('CDXXVI'))
 assert_equal(919, Roman.roman_to_arabic('CMXIX'))
 assert_equal(2020, Roman.roman_to_arabic('MMXX'))
 assert_equal(44, Roman.roman_to_arabic('XLIV'))
+assert_equal(44, Roman.roman_to_arabic('xliv'))
 
 # Arithmetic operations
 
@@ -55,5 +56,64 @@ assert_equal(2, second - roman)
 
 assert_equal(13, [Roman.new(1), Roman.new(3), Roman.new(9)].sum)
 assert_equal(15, [roman, 5, second].sum)
+
+## Comparable
+assert_equal(true, Roman.new(4) == 4)
+assert_equal(true, Roman.new(5) > Roman.new(1))
+
+## Special
+assert_equal(1, [Roman.new(1), Roman.new(3), Roman.new(9)].min)
+assert_equal(9, [Roman.new(1), Roman.new(3), Roman.new(9)].max)
+assert_equal([1, 2, 3], (1..100).first(Roman.new(3)))
+
+assert_equal('MMXX', Roman.new(2020).to_s)
+
+# Errors
+
+begin
+  Roman.new(5645)
+  raise 'Should have raised error.'
+rescue ArgumentError => e
+  puts "Overflow error raised with msg: #{e.message}"
+end
+
+begin
+  Roman.arabic_to_roman(5645)
+  raise 'Should have raised error.'
+rescue ArgumentError => e
+  puts "Overflow error raised with msg: #{e.message}"
+end
+
+begin
+  Roman.arabic_to_roman('MXAB')
+  raise 'Should have raised error.'
+rescue ArgumentError => e
+  puts "Overflow error raised with msg: #{e.message}"
+end
+
+begin
+  Roman.roman_to_arabic('MXAI')
+  raise 'Should have raised error.'
+rescue ArgumentError => e
+  puts "Overflow error raised with msg: #{e.message}"
+end
+
+begin
+  a = Roman.new('MXAI')
+  raise 'Should have raised error.'
+rescue ArgumentError => e
+  puts "Overflow error raised with msg: #{e.message}"
+end
+
+#### Integer / String patch
+
+assert_equal('MMXX', 2020.roman)
+assert_equal(2020, 'MMXX'.number)
+
+int_to_rom = 2020.to_rom
+raise 'Should be instance of Roman.' unless int_to_rom.is_a? Roman
+
+str_to_rom = 'MMXX'.to_rom
+raise 'Should be instance of Roman.' unless str_to_rom.is_a? Roman
 
 puts 'All checked.'
