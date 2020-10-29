@@ -5,11 +5,8 @@ require_relative 'string_addition'
 require_relative 'integer_addition'
 
 def assert_equal(expected, value)
-  raise "Expected result: #{expected}, got #{value}." unless expected == value
+  raise "Expected result: #{expected}, got #{value}." unless value == expected
 end
-
-a = Roman.new(5)
-# b = Roman.new('IV')
 
 # Arabic -> Roman test
 assert_equal('XIX', Roman.arabic_to_roman(19))
@@ -30,6 +27,7 @@ assert_equal(44, Roman.roman_to_arabic('XLIV'))
 assert_equal(44, Roman.roman_to_arabic('xliv'))
 
 # Arithmetic operations
+a = Roman.new(5)
 
 assert_equal(10, a + 5)
 assert_equal(10, 5 + a)
@@ -62,6 +60,19 @@ assert_equal(15, [roman, 5, second].sum)
 ## Comparable
 assert_equal(true, Roman.new(4) == 4)
 assert_equal(true, Roman.new(5) > Roman.new(1))
+
+# Setters
+setter_test = Roman.new(15)
+assert_equal(15, setter_test)
+assert_equal('XV', setter_test)
+
+setter_test.arab_value = 150
+assert_equal(150, setter_test)
+assert_equal('CL', setter_test)
+
+setter_test.roman_value = 'XVI'
+assert_equal(16, setter_test)
+assert_equal('XVI', setter_test)
 
 ## Special
 assert_equal(1, [Roman.new(1), Roman.new(3), Roman.new(9)].min)

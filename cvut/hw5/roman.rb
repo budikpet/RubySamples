@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Top level comment
 class Roman
   include Comparable
 
@@ -22,16 +23,31 @@ class Roman
   MAX_VALUE = 4000
   MIN_VALUE = 1
 
-  attr_accessor :arab_value
-  attr_accessor :roman_value
+  attr_reader :arab_value
+  attr_reader :roman_value
+  alias to_int arab_value
+  alias to_i arab_value
+  alias to_s roman_value
+
+  def arab_value=(arab_value)
+    @roman_value = Roman.arabic_to_roman(arab_value)
+    @arab_value = arab_value
+  end
+
+  def roman_value=(roman_value)
+    roman_value = roman_value.upcase
+    @arab_value = Roman.roman_to_arabic(roman_value)
+    @roman_value = roman_value
+  end
 
   def initialize(value)
     if value.is_a? String
-      @roman_value = value.upcase
+      value = value.upcase
       @arab_value = Roman.roman_to_arabic(value)
+      @roman_value = value
     else
-      @arab_value = value
       @roman_value = Roman.arabic_to_roman(value)
+      @arab_value = value
     end
   end
 
@@ -78,18 +94,6 @@ class Roman
     ROMAN_NUMBERS.keys.max
   end
 
-  def to_int
-    @arab_value
-  end
-
-  def to_i
-    @arab_value
-  end
-
-  def to_s
-    @roman_value
-  end
-
   #### Arithmetic operations
 
   def +(other)
@@ -123,6 +127,8 @@ class Roman
       @arab_value <=> other
     elsif other.is_a? Roman
       @arab_value <=> other.arab_value
+    elsif other.is_a? String
+      @roman_value.to_sym <=> other.to_sym
     end
   end
 
