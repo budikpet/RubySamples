@@ -97,23 +97,23 @@ class Roman
   #### Arithmetic operations
 
   def +(other)
-    other + @arab_value
+    @arab_value + other
   end
 
   def -(other)
-    other - @arab_value
+    @arab_value - other
   end
 
   def *(other)
-    other * @arab_value
+    @arab_value * other
   end
 
   def /(other)
-    other / @arab_value
+    @arab_value / other
   end
 
   def coerce(other)
-    [self, other]
+    [other, to_int]
   end
 
   ####
