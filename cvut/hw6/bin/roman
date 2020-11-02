@@ -2,4 +2,4 @@
 
 require 'roman/cli'
 
-Roman::CLI.run(ARGV)
+Roman::CLI.start(ARGV)
