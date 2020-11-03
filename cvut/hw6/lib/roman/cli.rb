@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'thor'
-require_relative 'cli_logic'
+require_relative 'logic/cli_logic'
 
 module Roman
   # Thor CLI interface for Roman CLI utility.

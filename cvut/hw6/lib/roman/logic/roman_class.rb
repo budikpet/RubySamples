@@ -90,6 +90,16 @@ class RomanClass
     res
   end
 
+  def self.roman?(str)
+    raise ArgumentError, "Value #{str} has to be string." unless str.is_a? String
+
+    str.each do |char|
+      return false unless ROMAN_NUMBERS.value? char
+    end
+
+    true
+  end
+
   def max_roman_number
     ROMAN_NUMBERS.keys.max
   end

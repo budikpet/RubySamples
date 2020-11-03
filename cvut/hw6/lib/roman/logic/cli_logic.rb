@@ -1,8 +1,24 @@
 # frozen_string_literal: true
 
-require_relative 'logic/roman_class'
-require_relative 'logic/string_addition'
-require_relative 'logic/integer_addition'
+require_relative 'roman_class'
+require_relative 'string_addition'
+require_relative 'integer_addition'
+
+def handle_arabic(input)
+  if input.contains_numeric?
+    input
+  else
+    RomanClass.roman_to_arabic input
+  end
+end
+
+def handle_roman(input)
+  if input.contains_numeric?
+    RomanClass.arabic_to_roman Float(input)
+  else
+    RomanClass.roman_to_arabic input
+  end
+end
 
 def roman_method_logic(arabic, roman)
   if arabic.nil? && roman.nil?
@@ -10,11 +26,10 @@ def roman_method_logic(arabic, roman)
     return
   end
 
-  unless arabic.nil?
-    if arabic.contains_numeric?
-      arabic
-    else
-      RomanClass.roman_to_arabic arabic
-    end
+  begin
+    return handle_arabic(arabic) unless arabic.nil?
+    return handle_roman(roman) unless roman.nil?
+  rescue ArgumentError => e
+    e.message
   end
 end
