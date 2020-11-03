@@ -3,7 +3,7 @@ GEM
   specs:
     minitest (5.14.2)
     ruby-progressbar (1.10.1)
-    thor (1.0.1)
+    thor (0.20.3)
     yard (0.9.25)
 
 PLATFORMS
@@ -12,7 +12,7 @@ PLATFORMS
 DEPENDENCIES
   minitest
   ruby-progressbar
-  thor
+  thor (~> 0.20.3)
   yard
 
 BUNDLED WITH

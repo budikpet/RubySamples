@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'ruby-progressbar'
-gem 'thor'
+gem 'thor', '~> 0.20.3'
 
 # group :development do
   gem 'minitest'

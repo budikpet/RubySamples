@@ -3,6 +3,8 @@
 require_relative 'roman_class'
 require_relative 'string_addition'
 require_relative 'integer_addition'
+require 'bundler/setup'
+Bundler.require(:default)
 
 def handle_arabic(input)
   if input.contains_numeric?
@@ -21,15 +23,8 @@ def handle_roman(input)
 end
 
 def roman_method_logic(arabic, roman)
-  if arabic.nil? && roman.nil?
-    CLI.command_help(Thor::Base.shell.new, 'roman')
-    return
-  end
-
-  begin
-    return handle_arabic(arabic) unless arabic.nil?
-    return handle_roman(roman) unless roman.nil?
-  rescue ArgumentError => e
-    e.message
-  end
+  return handle_arabic(arabic) unless arabic.nil?
+  return handle_roman(roman) unless roman.nil?
+rescue ArgumentError => e
+  e.message
 end

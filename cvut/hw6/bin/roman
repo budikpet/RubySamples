@@ -1,5 +1,3 @@
 #!/usr/bin/env ruby
 
-require 'roman/cli'
-
-Roman::CLI.start(ARGV)
+require 'roman'
