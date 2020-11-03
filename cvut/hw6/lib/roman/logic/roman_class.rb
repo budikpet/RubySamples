@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Top level comment
-class Roman
+class RomanClass
   include Comparable
 
   ROMAN_NUMBERS = {
@@ -30,23 +30,23 @@ class Roman
   alias to_s roman_value
 
   def arab_value=(arab_value)
-    @roman_value = Roman.arabic_to_roman(arab_value)
+    @roman_value = RomanClass.arabic_to_roman(arab_value)
     @arab_value = arab_value
   end
 
   def roman_value=(roman_value)
     roman_value = roman_value.upcase
-    @arab_value = Roman.roman_to_arabic(roman_value)
+    @arab_value = RomanClass.roman_to_arabic(roman_value)
     @roman_value = roman_value
   end
 
   def initialize(value)
     if value.is_a? String
       value = value.upcase
-      @arab_value = Roman.roman_to_arabic(value)
+      @arab_value = RomanClass.roman_to_arabic(value)
       @roman_value = value
     else
-      @roman_value = Roman.arabic_to_roman(value)
+      @roman_value = RomanClass.arabic_to_roman(value)
       @arab_value = value
     end
   end
@@ -125,7 +125,7 @@ class Roman
 
     if other.is_a? Integer
       @arab_value <=> other
-    elsif other.is_a? Roman
+    elsif other.is_a? RomanClass
       @arab_value <=> other.arab_value
     elsif other.is_a? String
       @roman_value.to_sym <=> other.to_sym

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'roman'
+require_relative 'roman_class'
 
 # Top comment
 class Integer

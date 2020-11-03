@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'roman'
+require_relative 'roman_class'
 
 # Top comment
 class String
@@ -10,5 +10,11 @@ class String
 
   def to_rom
     Roman.new(self)
+  end
+
+  def contains_numeric?
+    !Float(self).nil?
+  rescue StandardError
+    false
   end
 end
