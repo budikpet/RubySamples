@@ -17,7 +17,7 @@ module Roman
         CLI.command_help(Thor::Base.shell.new, 'roman')
         return
       end
-      cli_logic = CLIlogic.new
+      cli_logic = CLI_Logic.new
       puts cli_logic.roman_method_logic(arabic_cmd, roman_cmd)
     end
 

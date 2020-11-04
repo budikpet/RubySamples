@@ -6,7 +6,7 @@ require 'roman'
 # Tests Roman's implementation of Thor CLI
 class TestRomanCLI < Minitest::Test
   def setup
-    @cli = Roman::CLIlogic.new
+    @cli = Roman::CLI_Logic.new
   end
 
   def test_file_command_work

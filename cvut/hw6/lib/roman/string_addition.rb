@@ -2,14 +2,16 @@
 
 require_relative 'roman_class'
 
-# Top comment
+# String additions
 class String
+  # @return [Integer] Returns itself (should be a String with roman numbers) as arabic number.
   def number
-    Roman.roman_to_arabic(self)
+    RomanClass.roman_to_arabic(self)
   end
 
+  # @return [RomanClass] Returns itself as RomanClass.
   def to_rom
-    Roman.new(self)
+    RomanClass.new(self)
   end
 
   def contains_numeric?

@@ -3,9 +3,9 @@
 require 'minitest/autorun'
 require 'roman/cli_logic'
 
-class TestCliLogic < Minitest::Test
+class TestCLI_Logic < Minitest::Test
   def setup
-    @cli_logic = Roman::CLIlogic.new
+    @cli_logic = Roman::CLI_Logic.new
   end
 
   def test_handle_arabic

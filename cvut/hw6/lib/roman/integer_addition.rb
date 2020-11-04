@@ -2,13 +2,15 @@
 
 require_relative 'roman_class'
 
-# Top comment
+# Integer additions
 class Integer
+  # @return [String] Returns itself as roman number
   def roman
-    Roman.arabic_to_roman(self)
+    RomanClass.arabic_to_roman(self)
   end
 
+  # @return [RomanClass] Returns itself as RomanClass.
   def to_rom
-    Roman.new(self)
+    RomanClass.new(self)
   end
 end
