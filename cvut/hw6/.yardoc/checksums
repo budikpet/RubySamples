@@ -1,6 +1,0 @@
-lib/roman.rb b15c0dc4a9cd53a7f2a37c5433150ea17d87288b
-lib/roman/version.rb 240be9a8ae1ef41a461a5036ebf60e6bc3196e06
-lib/roman/cli_logic.rb db04e9c8432b9905ab05e764714c6bc37e744ca8
-lib/roman/roman_class.rb ecc328f523d0958c776f2959b1da21dbb34e625e
-lib/roman/string_addition.rb 15bb67cde3b0d1f4e441211c30fe03bec03e9e6f
-lib/roman/integer_addition.rb 87817941a425904d7ff5fb5943409afe5a04e29e
