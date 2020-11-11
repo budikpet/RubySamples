@@ -45,14 +45,14 @@ class Grid
   def row_elems(x)
     return enum_for(:row_elems, x) unless block_given?
 
-    # TODO: more code here
+    @data[x].each { |cell| yield cell }
   end
 
   # Yields elements in given column
   def col_elems(y)
     return enum_for(:col_elems, y) unless block_given?
 
-    # TODO: more code here
+    @data.each { |r| yield r[y] }
   end
 
   # Yields elements from block which is
@@ -107,7 +107,7 @@ class Grid
   def each
     return enum_for(:each) unless block_given?
 
-    # TODO: more code here
+    @data.each { |r| r.each { |cell| yield cell } }
   end
 
   # Return true if no filled number break sudoku rules
