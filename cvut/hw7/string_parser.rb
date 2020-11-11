@@ -34,7 +34,7 @@ class StringParser
       y = 0
 
       arg.each_char do |char|
-        grid[x][y] = char.to_i
+        grid[x][y] = Cell.new(char.to_i, dimension)
 
         y += 1
         if (y % dimension).zero?

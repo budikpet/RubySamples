@@ -4,12 +4,10 @@
 class Grid
   include Enumerable
 
-  EMPTY_VAL = 0
-
   # Create Sudoku game grid of given dimension
   def initialize(dimension)
     @dimension = dimension
-    @data = Array.new(dimension) { Array.new(dimension) { EMPTY_VAL } }
+    @data = Array.new(dimension) { Array.new(dimension) }
   end
 
   # Return string with game board in a console friendly format
@@ -27,7 +25,7 @@ class Grid
 
   # Return value at given position
   def value(x, y)
-    @data[x][y]
+    @data[x][y].to_i
   end
 
   # Marks number +z+ which shouldn't be at position [x, y]
@@ -35,11 +33,13 @@ class Grid
 
   # True when there is already a number
   def filled?(x, y)
-    @data[x][y] != EMPTY_VAL
+    @data[x][y].filled?
   end
 
   # True when no game was loaded
-  def empty?; end
+  def empty?
+    @data.select(&:nil?).empty?
+  end
 
   # Yields elements in given row
   def row_elems(x)
@@ -85,12 +85,12 @@ class Grid
 
   # Return number of missing numbers in grid
   def missing
-    @data.flatten(1).select { |num| num == EMPTY_VAL }.size
+    rows * cols - filled
   end
 
   # Number of filled cells
   def filled
-    rows * cols - missing
+    @data.flatten(1).select(&:filled?).size
   end
 
   # Number of rows in this sudoku
