@@ -41,7 +41,7 @@ class Sudoku
 
   def solve_using(unfilled_cells)
     until unfilled_cells.empty?
-      puts unfilled_cells.map(&:num_possible).join(',')
+      # puts unfilled_cells.map(&:num_possible).join(',')
       fillable = unfilled_cells.select { |cell| cell.num_possible == 1 }
       fillable.each do |cell|
         unfilled_cells.delete cell
@@ -85,9 +85,7 @@ class Sudoku
 
       pos = filled_cell.pos
 
-      EXCLUDE.call(@grid.row_elems(pos.x), filled_cell.to_i)
-      EXCLUDE.call(@grid.col_elems(pos.y), filled_cell.to_i)
-      EXCLUDE.call(@grid.block_elems(pos.x, pos.y), filled_cell.to_i)
+      full_exclude(pos, filled_cell.to_i)
     end
   end
 
