@@ -177,7 +177,11 @@ class Grid
   end
 
   # Serialize grid values to a one line string
-  def solution; end
+  def solution
+    arr = []
+    each { |cell| arr.push cell.to_i }
+    arr.join('')
+  end
 
   private def get_curr_row_s(row, leading_spaces)
     res = row.map(&:to_i)
