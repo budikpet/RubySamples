@@ -20,12 +20,13 @@ class Grid
     row_div = block_size.times.collect { block_row_div }.join('+')
 
     @data.each do |row|
-      rows.push row_div
+      rows.push row_div if (row[0].pos.x % block_size).zero?
       curr_row = get_curr_row_s(row, leading_spaces)
 
       rows.push curr_row
     end
 
+    rows.push row_div
     rows.join("\n")
   end
 
