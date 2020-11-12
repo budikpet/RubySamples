@@ -19,6 +19,11 @@ class Cell
     @pos = pos
   end
 
+  def use_next_possible
+    exclude(@value) if @filled && @possible.include?(@value)
+    @value = @possible.first
+  end
+
   # true when value was already assigned
   def filled?
     @value.positive?
@@ -35,6 +40,14 @@ class Cell
   # return true if number was deleted
   def exclude(num)
     return true if !filled? && @possible.delete(num)
+
+    false
+  end
+
+  # include possibility
+  # return true if number was included
+  def include(num)
+    return true if !filled? && @possible.insert(num - 1, num)
 
     false
   end

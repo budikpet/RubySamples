@@ -30,14 +30,56 @@ class Sudoku
     raise 'invalid game given' unless @grid.valid?
 
     exclude_preset_numbers
+
+    unfilled_cells = []
+    @grid.each { |cell| unfilled_cells.push(cell) unless cell.filled? }
+    unfilled_cells = unfilled_cells.sort { |cell_a, cell_b| cell_a.num_possible <=> cell_b.num_possible }
+    solve_using(unfilled_cells)
+
+    @grid.solution
+  end
+
+  def solve_using(unfilled_cells)
+    until unfilled_cells.empty?
+      puts unfilled_cells.map(&:num_possible).join(',')
+      fillable = unfilled_cells.select { |cell| cell.num_possible == 1 }
+      fillable.each do |cell|
+        unfilled_cells.delete cell
+        cell.use_next_possible
+        full_exclude(cell.pos, cell.value)
+      end
+    end
+  end
+
+  def solution
+    @grid.solution
   end
 
   def to_s
     @grid.to_s
   end
 
+  protected
+
+  # Solves the given sudoku using recursion
+  #
+  # @param unfilled_cells [Array<Cell>] is an array of all unfilled cells
+  #   in the given sudoku sorted by number of possible solutions of each cell.
+  # @param cell_index [Integer] is an index in unfilled_cells that the current recursion step should check.
+  #
+  # @return True if the current recursion step and all its substeps are valid.
+  # def rec_solve(unfilled_cells, cell_index)
+  #   cell = unfilled_cells[cell_index]
+
+  #   # Check all possible values of this cell
+  #   while cell.num_possible.positive?
+      
+
+  #   end
+  # end
+
   # Exclude all numbers that were preset in all cells of its row, column and block
-  private def exclude_preset_numbers
+  def exclude_preset_numbers
     @grid.each do |filled_cell|
       next unless filled_cell.filled?
 
@@ -49,7 +91,11 @@ class Sudoku
     end
   end
 
-  protected
+  def full_exclude(pos, value)
+    EXCLUDE.call(@grid.row_elems(pos.x), value)
+    EXCLUDE.call(@grid.col_elems(pos.y), value)
+    EXCLUDE.call(@grid.block_elems(pos.x, pos.y), value)
+  end
 
   def load(game)
     PARSERS.each do |p|

@@ -168,7 +168,16 @@ class Grid
     true
   end
 
-  private def cell_valid?(cell)
+  # Serialize grid values to a one line string
+  def solution
+    arr = []
+    each { |cell| arr.push cell.to_i }
+    arr.join('')
+  end
+
+  private 
+  
+  def cell_valid?(cell)
     pos = cell.pos
     return false unless row_elems(pos.x).map(&:to_i).select { |i| i == cell.to_i }.size == 1
     return false unless col_elems(pos.y).map(&:to_i).select { |i| i == cell.to_i }.size == 1
@@ -177,14 +186,7 @@ class Grid
     true
   end
 
-  # Serialize grid values to a one line string
-  def solution
-    arr = []
-    each { |cell| arr.push cell.to_i }
-    arr.join('')
-  end
-
-  private def get_curr_row_s(row, leading_spaces)
+  def get_curr_row_s(row, leading_spaces)
     res = row.map(&:to_i)
              .join('')
              .gsub(/(\d\d\d)/, '\1 ')
