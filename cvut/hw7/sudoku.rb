@@ -40,15 +40,32 @@ class Sudoku
   end
 
   def solve_using(unfilled_cells)
-    until unfilled_cells.empty?
-      # puts unfilled_cells.map(&:num_possible).join(',')
-      fillable = unfilled_cells.select { |cell| cell.num_possible == 1 }
-      fillable.each do |cell|
-        unfilled_cells.delete cell
-        cell.use_next_possible
-        full_exclude(cell.pos, cell.value)
+    # unfilled_cells = []
+    # cell = Cell.new
+    # @grid = Grid.new
+    puts unfilled_cells.map(&:num_possible).join(',')
+    cell = unfilled_cells.shift
+
+    if unfilled_cells.empty?
+      cell.possible.each do |i|
+        cell.value = i
+        return true if @grid.valid?(cell.pos)
       end
+
+      return false
     end
+
+    cell.possible.each do |i|
+      cell.value = i
+      next unless @grid.valid?(cell.pos)
+
+      res = solve_using(unfilled_cells)
+      return true if res
+    end
+    cell.value = 0
+    unfilled_cells.unshift(cell)
+
+    false
   end
 
   def solution
@@ -73,7 +90,6 @@ class Sudoku
 
   #   # Check all possible values of this cell
   #   while cell.num_possible.positive?
-      
 
   #   end
   # end

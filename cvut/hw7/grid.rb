@@ -175,8 +175,8 @@ class Grid
     arr.join('')
   end
 
-  private 
-  
+  private
+
   def cell_valid?(cell)
     pos = cell.pos
     return false unless row_elems(pos.x).map(&:to_i).select { |i| i == cell.to_i }.size == 1
