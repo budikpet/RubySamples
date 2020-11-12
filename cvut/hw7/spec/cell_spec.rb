@@ -26,4 +26,12 @@ describe Cell do
       expect { cell.exclude(5) }.to change { cell.num_possible }.from(9).to(8)
     end
   end
+
+  context 'contains grid position value' do
+    subject(:cell) { Cell.new(1, 9, Position.new(1, 5)) }
+
+    it { expect(cell.pos.nil?).to eq false }
+    it { expect(cell.pos.x).to eq 1 }
+    it { expect(cell.pos.y).to eq 5 }
+  end
 end

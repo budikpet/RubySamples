@@ -155,7 +155,26 @@ class Grid
   end
 
   # Return true if no filled number break sudoku rules
-  def valid?; end
+  def valid?(pos = nil)
+    return cell_valid?(@data[pos.x][pos.y]) unless pos.nil?
+
+    each do |cell|
+      if cell.filled?
+        return false unless cell_valid?(cell)
+      end
+    end
+
+    true
+  end
+
+  private def cell_valid?(cell)
+    pos = cell.pos
+    return false unless row_elems(pos.x).map(&:to_i).select { |i| i == cell.to_i }.size == 1
+    return false unless col_elems(pos.y).map(&:to_i).select { |i| i == cell.to_i }.size == 1
+    return false unless block_elems(pos.x, pos.y).map(&:to_i).select { |i| i == cell.to_i }.size == 1
+
+    true
+  end
 
   # Serialize grid values to a one line string
   def solution; end
@@ -168,9 +187,13 @@ class Grid
              .split(' ')
 
     res = res.map do |box_str|
-      box_str.split('')
-             .map { |num| num.to_i.zero? ? "#{leading_spaces} #{leading_spaces}" : "#{leading_spaces}#{num}#{leading_spaces}" }
-             .join('')
+      res = box_str.split('')
+      res = res.map do |num|
+        num = num.to_i.zero? ? ' ' : num
+        "#{leading_spaces}#{num}#{leading_spaces}"
+      end
+
+      res.join('')
     end
 
     res.join('|')

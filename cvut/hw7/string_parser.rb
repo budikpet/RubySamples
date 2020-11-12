@@ -2,6 +2,7 @@
 
 require_relative './grid'
 require_relative 'cell'
+require_relative 'position'
 # Parse string for 9x9 sudoku game
 class StringParser
   # Static methods will follow
@@ -35,7 +36,7 @@ class StringParser
       y = 0
 
       arg.each_char do |char|
-        grid[x][y] = Cell.new(char.to_i, dimension)
+        grid[x][y] = Cell.new(char.to_i, dimension, Position.new(x, y))
 
         y += 1
         if (y % dimension).zero?
