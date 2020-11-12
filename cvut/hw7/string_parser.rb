@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './grid'
+require_relative 'cell'
 # Parse string for 9x9 sudoku game
 class StringParser
   # Static methods will follow

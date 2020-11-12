@@ -11,7 +11,23 @@ class Grid
   end
 
   # Return string with game board in a console friendly format
-  def to_s(width = 3); end
+  def to_s(width = 3)
+    rows = []
+    leading_spaces = ((width - 1) / 2).times.collect { ' ' }.join('')
+
+    ## Prepare row divider
+    block_row_div = (width * block_size).times.collect { '-' }.join('')
+    row_div = block_size.times.collect { block_row_div }.join('+')
+
+    @data.each do |row|
+      rows.push row_div
+      curr_row = get_curr_row_s(row, leading_spaces)
+
+      rows.push curr_row
+    end
+
+    rows.join("\n")
+  end
 
   # First element in the sudoku grid
   def first
@@ -62,14 +78,11 @@ class Grid
   def block_elems(x, y)
     return enum_for(:block_elems, x, y) unless block_given?
 
-    block_x_size = Math.sqrt(cols).to_i
-    block_y_size = Math.sqrt(rows).to_i
+    x -= x % block_size
+    y -= y % block_size
 
-    x -= x % block_x_size
-    y -= y % block_y_size
-
-    (x...(x + block_x_size)).each do |curr_x|
-      (y...(y + block_y_size)).each do |curr_y|
+    (x...(x + block_size)).each do |curr_x|
+      (y...(y + block_size)).each do |curr_y|
         yield @data[curr_x][curr_y]
       end
     end
@@ -79,8 +92,6 @@ class Grid
   # containing element at given position
   def block(block_pos)
     return enum_for(:block, block_pos) unless block_given?
-
-    block_size = Math.sqrt(cols).to_i
 
     y = (block_pos * block_size) % rows
     x = ((block_pos * block_size) / cols) * block_size
@@ -132,6 +143,10 @@ class Grid
     @dimension
   end
 
+  def block_size
+    Math.sqrt(cols).to_i
+  end
+
   # Iterates over all elements, left to right, top to bottom
   def each
     return enum_for(:each) unless block_given?
@@ -144,4 +159,20 @@ class Grid
 
   # Serialize grid values to a one line string
   def solution; end
+
+  private def get_curr_row_s(row, leading_spaces)
+    res = row.map(&:to_i)
+             .join('')
+             .gsub(/(\d\d\d)/, '\1 ')
+             .strip
+             .split(' ')
+
+    res = res.map do |box_str|
+      box_str.split('')
+             .map { |num| num.to_i.zero? ? "#{leading_spaces} #{leading_spaces}" : "#{leading_spaces}#{num}#{leading_spaces}" }
+             .join('')
+    end
+
+    res.join('|')
+  end
 end
