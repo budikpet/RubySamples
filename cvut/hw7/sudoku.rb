@@ -13,7 +13,10 @@ class Sudoku
     end
   end
 
+  attr_reader :grid
+
   def initialize(game)
+    # @grid = Grid.new
     @grid = load(game)
   end
 
@@ -26,7 +29,24 @@ class Sudoku
   def solve
     raise 'invalid game given' unless @grid.valid?
 
-    # TODO: more code here
+    exclude_preset_numbers
+  end
+
+  def to_s
+    @grid.to_s
+  end
+
+  # Exclude all numbers that were preset in all cells of its row, column and block
+  private def exclude_preset_numbers
+    @grid.each do |filled_cell|
+      next unless filled_cell.filled?
+
+      pos = filled_cell.pos
+
+      @grid.row_elems(pos.x).reject(&:filled?).each { |cell| cell.exclude filled_cell.to_i }
+      @grid.col_elems(pos.y).reject(&:filled?).each { |cell| cell.exclude filled_cell.to_i }
+      @grid.block_elems(pos.x, pos.y).reject(&:filled?).each { |cell| cell.exclude filled_cell.to_i }
+    end
   end
 
   protected
