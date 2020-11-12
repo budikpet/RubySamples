@@ -43,9 +43,9 @@ class Sudoku
 
       pos = filled_cell.pos
 
-      @grid.row_elems(pos.x).reject(&:filled?).each { |cell| cell.exclude filled_cell.to_i }
-      @grid.col_elems(pos.y).reject(&:filled?).each { |cell| cell.exclude filled_cell.to_i }
-      @grid.block_elems(pos.x, pos.y).reject(&:filled?).each { |cell| cell.exclude filled_cell.to_i }
+      EXCLUDE.call(@grid.row_elems(pos.x), filled_cell.to_i)
+      EXCLUDE.call(@grid.col_elems(pos.y), filled_cell.to_i)
+      EXCLUDE.call(@grid.block_elems(pos.x, pos.y), filled_cell.to_i)
     end
   end
 
