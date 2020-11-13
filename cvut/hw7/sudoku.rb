@@ -43,7 +43,7 @@ class Sudoku
     # unfilled_cells = []
     # cell = Cell.new
     # @grid = Grid.new
-    puts unfilled_cells.map(&:num_possible).join(',')
+    # puts unfilled_cells.map(&:num_possible).join(',')
     cell = unfilled_cells.shift
 
     if unfilled_cells.empty?
