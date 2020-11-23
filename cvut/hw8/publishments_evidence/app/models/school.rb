@@ -1,3 +1,3 @@
 class School < ApplicationRecord
-  validate :name, :code, presence: true
+  validates :name, :code, presence: true
 end
