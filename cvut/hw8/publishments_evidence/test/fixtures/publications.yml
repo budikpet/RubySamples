@@ -4,8 +4,10 @@ one:
   title: MyString
   published_at: MyString
   abstract: MyString
+  published: false
 
 two:
   title: MyString
   published_at: MyString
   abstract: MyString
+  published: false

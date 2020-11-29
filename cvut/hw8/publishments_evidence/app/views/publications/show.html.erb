@@ -15,5 +15,10 @@
   <%= @publication.abstract %>
 </p>
 
+<p>
+  <strong>Published:</strong>
+  <%= @publication.published %>
+</p>
+
 <%= link_to 'Edit', edit_publication_path(@publication) %> |
 <%= link_to 'Back', publications_path %>

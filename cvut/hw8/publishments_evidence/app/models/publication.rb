@@ -1,5 +1,5 @@
 class Publication < ApplicationRecord
-  belongs_to :person
-
   validates :title, presence: true
+
+  belongs_to :person
 end

@@ -17,7 +17,7 @@ class PublicationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create publication" do
     assert_difference('Publication.count') do
-      post publications_url, params: { publication: { abstract: @publication.abstract, published_at: @publication.published_at, title: @publication.title } }
+      post publications_url, params: { publication: { abstract: @publication.abstract, published: @publication.published, published_at: @publication.published_at, title: @publication.title } }
     end
 
     assert_redirected_to publication_url(Publication.last)
@@ -34,7 +34,7 @@ class PublicationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update publication" do
-    patch publication_url(@publication), params: { publication: { abstract: @publication.abstract, published_at: @publication.published_at, title: @publication.title } }
+    patch publication_url(@publication), params: { publication: { abstract: @publication.abstract, published: @publication.published, published_at: @publication.published_at, title: @publication.title } }
     assert_redirected_to publication_url(@publication)
   end
 

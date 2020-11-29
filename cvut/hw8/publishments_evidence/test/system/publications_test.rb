@@ -15,6 +15,7 @@ class PublicationsTest < ApplicationSystemTestCase
     click_on "New Publication"
 
     fill_in "Abstract", with: @publication.abstract
+    check "Published" if @publication.published
     fill_in "Published at", with: @publication.published_at
     fill_in "Title", with: @publication.title
     click_on "Create Publication"
@@ -28,6 +29,7 @@ class PublicationsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Abstract", with: @publication.abstract
+    check "Published" if @publication.published
     fill_in "Published at", with: @publication.published_at
     fill_in "Title", with: @publication.title
     click_on "Update Publication"
