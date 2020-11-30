@@ -17,3 +17,19 @@
 
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>
+
+<p>
+
+<div id="linked_publications">
+  <p>
+   <strong>Linked publications:</strong>
+  </p>
+
+  <% linked_publications.each do |publication| %>
+    <tr>
+      <td><%= publication.title %></td>
+      <td><%= link_to 'Show', publication %></td>
+    </tr>
+    <p>
+  <% end %>
+</div>
