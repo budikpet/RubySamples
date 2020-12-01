@@ -22,5 +22,9 @@ module CurrencyConvertor
 
       @data = data.map { |currency_data| [currency_data.code, currency_data] }.to_h
     end
+
+    def currency_supported?(currency_code)
+      currency_code == CurrencyConvertor::CZK_CODE || @data.key?(currency_code)
+    end
   end
 end

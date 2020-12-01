@@ -2,7 +2,6 @@
 
 module CurrencyConvertor
   class CurrencyData
-
     attr_accessor :country
     attr_accessor :name
     attr_accessor :amount
@@ -12,9 +11,9 @@ module CurrencyConvertor
     def initialize(country, name, amount, code, rate)
       @country = country
       @name = name
-      @amount = amount
+      @amount = amount.to_i
       @code = code
-      @rate = rate
+      @rate = rate.sub(',', '.').to_f
     end
   end
 end

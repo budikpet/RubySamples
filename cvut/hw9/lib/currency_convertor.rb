@@ -5,6 +5,7 @@ require 'bundler/setup'
 require 'thor'
 
 module CurrencyConvertor
+  CZK_CODE = 'CZK'
   # Thor CLI interface for currency_convertor CLI utility.
   class CLI < Thor
     desc 'convert [OPTIONS]', ''
@@ -12,8 +13,8 @@ module CurrencyConvertor
       Converts given value between 2 currencies using current prices from ČNB.
     LONGDESC
     method_option :amount, type: :numeric, aliases: '-v', required: true, desc: 'Amount of money in the input currency.'
-    method_option :input_currency, type: :string, aliases: '-i', default: 'CZK', desc: 'Code of the input currency.'
-    method_option :output_currency, type: :string, aliases: '-o', required: true, desc: 'Code of the output currency.'
+    method_option :input_currency, type: :string, aliases: '-i', required: true, desc: 'Code of the input currency.'
+    method_option :output_currency, type: :string, aliases: '-o', default: CZK_CODE, desc: 'Code of the output currency.'
     def convert
       cli_logic = CLI_Logic.new
 
