@@ -35,12 +35,11 @@ or
 $ ./currency_convertor.rb -h
 ```
 
-<!--
 Run tests:
 ```
 $ rspec spec
 ```
--->
+
 Generate documentation:
 ```
 $ yardoc 'lib/**/*.rb'
