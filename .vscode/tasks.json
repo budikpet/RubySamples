@@ -7,6 +7,11 @@
       "label": "Run roman rdebug-ide",
       "type": "shell",
       "command": "cd cvut/hw6; rdebug-ide --host 127.0.0.1 --port 1234 ./roman.rb"
+    },
+    {
+      "label": "Run currency convertor rdebug-ide",
+      "type": "shell",
+      "command": "cd cvut/hw9; rdebug-ide --host 127.0.0.1 --port 1234 ./currency_convertor.rb convert -v 500 -o EUR"
     }
   ]
 }

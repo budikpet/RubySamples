@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'currency_convertor/cli_logic'
-require_relative 'currency_convertor/replace_modes'
 require 'bundler/setup'
 require 'thor'
 
@@ -13,8 +12,8 @@ module CurrencyConvertor
       Converts given value between 2 currencies using current prices from ČNB.
     LONGDESC
     method_option :amount, type: :numeric, aliases: '-v', required: true, desc: 'Amount of money in the input currency.'
-    method_option :input_currency, type: :string, aliases: '-i', default: '', desc: 'Name of the input currency.'
-    method_option :output_currency, type: :boolean, aliases: '-o', default: false, desc: 'Name of the output currency.'
+    method_option :input_currency, type: :string, aliases: '-i', default: 'CZK', desc: 'Code of the input currency.'
+    method_option :output_currency, type: :string, aliases: '-o', required: true, desc: 'Code of the output currency.'
     def convert
       cli_logic = CLI_Logic.new
 
