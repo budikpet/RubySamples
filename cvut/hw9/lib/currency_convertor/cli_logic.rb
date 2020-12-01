@@ -22,13 +22,11 @@ module CurrencyConvertor
     # Contains logic of currencies CLI command.
     # Return names and codes of all supported currencies.
     def currencies
-      raise ArgumentError, 'Parameter find_str must be provided.' if find_str.nil?
-      raise ArgumentError, 'No files or folders provided for renaming.' unless files_folders.has_data?
-      unless files_folders.any? { |path| File.exist?(path) }
-        raise ArgumentError, 'Neither of provided files or folders exists.'
-      end
+      currencies_data = CurrenciesData.new
 
-      
+      currencies_data.data.each do |code, currency_data|
+        puts "Měna '#{currency_data.name}' [#{code}] ze země #{currency_data.country}."
+      end
     end
   end
 end
